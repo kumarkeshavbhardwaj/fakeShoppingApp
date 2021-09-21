@@ -18,7 +18,6 @@ class Controller extends GetxController {
   var tabIndex = 0.obs;
   var isFav = false.obs;
   var favoriteProducts = <Product>[].obs;
-
   SharedPreferences? preferences;
 
   @override
@@ -29,29 +28,25 @@ class Controller extends GetxController {
   }
 
   decodeSharedPrefs() async {
+    //decoding data from JSON on re-init
     preferences = await SharedPreferences.getInstance();
     var decodedData = preferences!.getString('favorites');
     var decodedList = Product.decode(decodedData!);
     favoriteProducts.value = decodedList;
-    print(favoriteProducts);
+
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  
 
   void fetchProducts() async {
     isLoading(true);
-    try {
+    
       var products = await APIServices.fetchProducts();
       if (products != null) {
         productList.value = products;
         fetchCategories();
       }
-    } finally {
-      //------------
-    }
+  
   }
 
   void fetchCategories() async {
@@ -67,53 +62,6 @@ class Controller extends GetxController {
     }
   }
 
-  void fetchCategory1Products() async {
-    isLoading(true);
-    try {
-      var categories = await APIServices.fetchCategories();
-      if (categories != null) {
-        categoriesList.value = categories;
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  void fetchCategory2Products() async {
-    isLoading(true);
-    try {
-      var categories = await APIServices.fetchCategories();
-      if (categories != null) {
-        categoriesList.value = categories;
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  void fetchCategory3Products() async {
-    isLoading(true);
-    try {
-      var categories = await APIServices.fetchCategories();
-      if (categories != null) {
-        categoriesList.value = categories;
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  void fetchCategory4Products() async {
-    isLoading(true);
-    try {
-      var categories = await APIServices.fetchCategories();
-      if (categories != null) {
-        categoriesList.value = categories;
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
 
   void linkToProductDetail(int id) async {
     isLoading(true);
@@ -150,8 +98,7 @@ class Controller extends GetxController {
   }
 
   void checkFav(int id) {
-    ;
-    // print(product.category);
+
     if (favoriteProducts.where((product) => product.id == id).isNotEmpty) {
       print('fav');
       isFav.value = true;
@@ -162,64 +109,66 @@ class Controller extends GetxController {
   }
 
   void makeFavorite(int id) {
-    // Product product = productList.where((product) => product.id == id).single;
-
     if (favoriteProducts.where((product) => product.id == id).isNotEmpty) {
-      isFav.value = false;
-      print('removing');
+      isFav.value = false; //-- Optimistic UI 
       removeFav(id);
     } else {
-            isFav.value = true;
-
-      print('adding');
+      isFav.value = true; //-- Optimistic UI 
       addFav(id);
     }
   }
 
   void addFav(int id) {
-    
     Product product = productList.where((product) => product.id == id).single;
     favoriteProducts.add(product);
-    encodeSharedPrefs();
+    encodeSharedPrefs(); 
   }
 
   void removeFav(int id) {
-
-
     Product product = productList.where((product) => product.id == id).single;
     favoriteProducts.removeWhere((fproduct) => fproduct.id == product.id);
     encodeSharedPrefs();
   }
 
   void encodeSharedPrefs() {
+    //encode favorites list to product list and load on re-init
+    //---To save multiple API Calls, all products will be encoded directly. 
     var encodedData = Product.encode(favoriteProducts);
     preferences!.setString('favorites', encodedData);
   }
 
   void extractProducts() {
-    // print(categoriesList.length);
-    // print(productList.length);
+    //---To save multiple API Calls, this method will extract "category", split it & store that data
+    //---alternative way is to call by using "category" argument and then storing it.
+
     categoriesList.forEach((element) {
       var list =
           productList.where((product) => product.category == element).toList();
 
       if (category1List.length == 0) {
-        // print(list.first.category);
+
         category1List.value = list;
         thumbnailsList.add(category1List.first.image!);
       } else if (category2List.length == 0) {
-        // print(list.first.category);
+
         category2List.value = list;
         thumbnailsList.add(category2List.first.image!);
       } else if (category3List.length == 0) {
-        // print(list.first.category);
+
         category3List.value = list;
         thumbnailsList.add(category3List.first.image!);
       } else {
-        // print(list.first.category);
+
         category4List.value = list;
         thumbnailsList.add(category4List.first.image!);
       }
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  
 }
