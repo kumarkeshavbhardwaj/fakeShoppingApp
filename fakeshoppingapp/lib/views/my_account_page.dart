@@ -5,8 +5,17 @@ class MyAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('My Account')),
+    return Scaffold(
+       backgroundColor: Colors.white,
+         appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          'My Account Page',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Center(child: Text('My Account')),
     );
   }
 }

@@ -11,6 +11,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -20,7 +21,7 @@ class FavoritesPage extends StatelessWidget {
         ),
       ),
       body: Obx(() {
-        if (controller .favoriteProducts.length == 0) {
+        if (controller.favoriteProducts.length == 0) {
           return Center(
             child: Text('Click on Heart Icon to make favorite'),
           );
@@ -28,20 +29,19 @@ class FavoritesPage extends StatelessWidget {
         return GridView.builder(
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemCount: controller .favoriteProducts.length,
+            itemCount: controller.favoriteProducts.length,
             itemBuilder: (context, index) {
               return ProductTile(
                 function: () {
-                  controller .checkFav(
-                      controller .favoriteProducts[index].id!);
-                  print(controller .favoriteProducts[index].id);
+                  controller.checkFav(
+                      controller.favoriteProducts[index].id!);
                   Get.to(() => ProductDetail());
-                  controller .linkToProductDetail(
-                      controller .favoriteProducts[index].id!);
+                  controller.linkToProductDetail(
+                      controller.favoriteProducts[index].id!);
                 },
-                title: controller .favoriteProducts[index].title,
-                image: controller .favoriteProducts[index].image,
-                price: controller .favoriteProducts[index].price,
+                title: controller.favoriteProducts[index].title,
+                image: controller.favoriteProducts[index].image,
+                price: controller.favoriteProducts[index].price,
               );
             });
       }),

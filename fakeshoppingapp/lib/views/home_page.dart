@@ -36,12 +36,12 @@ class HomePage extends StatelessWidget {
           SearchBox(),
           Expanded(
             child: Obx(() {
-              if (controller .isLoading.value) {
+              if (controller.isLoading.value) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (controller .searchKeyword.value != '') {
-                controller .searchList();
+              } else if (controller.searchKeyword.value != '') {
+                controller.searchList();
                 return buildFilteredList();
               }
               return SingleChildScrollView(
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          controller .categoriesList[0].capitalizeFirst!,
+                          controller.categoriesList[0].capitalizeFirst!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: unit * 5),
                         ),
@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          controller .categoriesList[1].capitalizeFirst!,
+                          controller.categoriesList[1].capitalizeFirst!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: unit * 5),
                         ),
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          controller .categoriesList[2].capitalizeFirst!,
+                          controller.categoriesList[2].capitalizeFirst!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: unit * 5),
                         ),
@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          controller .categoriesList[3].capitalizeFirst!,
+                          controller.categoriesList[3].capitalizeFirst!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: unit * 5),
                         ),
@@ -140,24 +140,23 @@ class HomePage extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
         onTap: () {
-          controller 
-                            .checkFav(controller .filteredProducts[index].id!);
+          controller.checkFav(controller.filteredProducts[index].id!);
           Get.to(() => ProductDetail());
-          controller .searchKeyword.value = '';
-          controller .linkToProductDetail(
-              controller .filteredProducts[index].id!);
+          controller.searchKeyword.value = '';
+          controller.linkToProductDetail(
+              controller.filteredProducts[index].id!);
         },
         title: Text(
-          controller .filteredProducts[index].title!,
+          controller.filteredProducts[index].title!,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
-          '\$ ${controller .filteredProducts[index].price}',
+          '\$ ${controller.filteredProducts[index].price}',
         ),
         leading:
-            Image.network(controller .filteredProducts[index].image!),
+            Image.network(controller.filteredProducts[index].image!),
       ),
-      itemCount: controller .filteredProducts.length,
+      itemCount: controller.filteredProducts.length,
     );
   }
 
@@ -176,19 +175,17 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-                controller .category4List.length,
+                controller.category4List.length,
                 (index) => ProductTile(
                       function: () {
-                        controller 
-                            .checkFav(controller .category4List[index].id!);
-                        // print(controller .category4List[index].id);
+                        controller.checkFav(controller.category4List[index].id!);
                         Get.to(() => ProductDetail());
-                        controller .linkToProductDetail(
-                            controller .category4List[index].id!);
+                        controller.linkToProductDetail(
+                            controller.category4List[index].id!);
                       },
-                      image: controller .category4List[index].image,
-                      title: controller .category4List[index].title,
-                      price: controller .category4List[index].price,
+                      image: controller.category4List[index].image,
+                      title: controller.category4List[index].title,
+                      price: controller.category4List[index].price,
                     ))),
       ),
     );
@@ -200,18 +197,17 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-                controller .category3List.length,
+                controller.category3List.length,
                 (index) => ProductTile(
                       function: () {
-                        controller 
-                            .checkFav(controller .category3List[index].id!);
+                        controller.checkFav(controller.category3List[index].id!);
                         Get.to(() => ProductDetail());
-                        controller .linkToProductDetail(
-                            controller .category3List[index].id!);
+                        controller.linkToProductDetail(
+                            controller.category3List[index].id!);
                       },
-                      image: controller .category3List[index].image,
-                      title: controller .category3List[index].title,
-                      price: controller .category3List[index].price,
+                      image: controller.category3List[index].image,
+                      title: controller.category3List[index].title,
+                      price: controller.category3List[index].price,
                     ))),
       ),
     );
@@ -223,19 +219,18 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-                controller .category2List.length,
+                controller.category2List.length,
                 (index) => ProductTile(
                       function: () {
-                        // print(controller .category2List[index].id);
                         Get.to(() => ProductDetail());
                         controller 
-                            .checkFav(controller .category2List[index].id!);
-                        controller .linkToProductDetail(
-                            controller .category2List[index].id!);
+                            .checkFav(controller.category2List[index].id!);
+                        controller.linkToProductDetail(
+                            controller.category2List[index].id!);
                       },
-                      image: controller .category2List[index].image,
-                      title: controller .category2List[index].title,
-                      price: controller .category2List[index].price,
+                      image: controller.category2List[index].image,
+                      title: controller.category2List[index].title,
+                      price: controller.category2List[index].price,
                     ))),
       ),
     );
@@ -247,19 +242,18 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-                controller .category1List.length,
+                controller.category1List.length,
                 (index) => ProductTile(
                       function: () {
                         controller 
-                            .checkFav(controller .category1List[index].id!);
-                        // print(controller .category1List[index].id);
+                            .checkFav(controller.category1List[index].id!);
                         Get.to(() => ProductDetail());
-                        controller .linkToProductDetail(
-                            controller .category1List[index].id!);
+                        controller.linkToProductDetail(
+                            controller.category1List[index].id!);
                       },
-                      image: controller .category1List[index].image,
-                      title: controller .category1List[index].title,
-                      price: controller .category1List[index].price,
+                      image: controller.category1List[index].image,
+                      title: controller.category1List[index].title,
+                      price: controller.category1List[index].price,
                     ))),
       ),
     );
@@ -271,18 +265,18 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-                controller .productList.length,
+                controller.productList.length,
                 (index) => ProductTile(
                       function: () {
                         controller 
-                            .checkFav(controller .productList[index].id!);
+                            .checkFav(controller.productList[index].id!);
                         Get.to(() => ProductDetail());
-                        controller .linkToProductDetail(
-                            controller .productList[index].id!);
+                        controller.linkToProductDetail(
+                            controller.productList[index].id!);
                       },
-                      image: controller .productList[index].image,
-                      title: controller .productList[index].title,
-                      price: controller .productList[index].price,
+                      image: controller.productList[index].image,
+                      title: controller.productList[index].title,
+                      price: controller.productList[index].price,
                     ))),
       ),
     );
@@ -295,10 +289,10 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-          controller .categoriesList.length,
+          controller.categoriesList.length,
           (index) => CategoryTile(
-            image: controller .thumbnailsList[index],
-            title: controller .categoriesList[index].capitalizeFirst,
+            image: controller.thumbnailsList[index],
+            title: controller.categoriesList[index].capitalizeFirst,
           ),
         )),
       ),

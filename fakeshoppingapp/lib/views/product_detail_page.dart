@@ -10,8 +10,9 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var unit = MediaQuery.of(context).size.width / 100;
     return WillPopScope(
-      onWillPop: controller .onBackPress,
+      onWillPop: controller.onBackPress,
       child: Scaffold(
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -20,7 +21,7 @@ class ProductDetail extends StatelessWidget {
                 Icons.arrow_back_ios,
                 color: Colors.black,
               ),
-              onPressed: controller .onBackPress),
+              onPressed: controller.onBackPress),
           title: Text(
             'Product Detail',
             style: TextStyle(color: Colors.black),
@@ -31,7 +32,7 @@ class ProductDetail extends StatelessWidget {
         body: Obx(
           () => Container(
             padding: EdgeInsets.symmetric(horizontal: unit * 10),
-            child: controller .isLoading.value
+            child: controller.isLoading.value
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
@@ -44,7 +45,7 @@ class ProductDetail extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: Image.network(
-                                controller .product.value.image!,
+                                controller.product.value.image!,
                                 height: unit * 70,
                               ),
                             ),
@@ -60,7 +61,7 @@ class ProductDetail extends StatelessWidget {
                                             BorderRadius.circular(90)),
                                     child: InkWell(
                                       onTap: () {
-                                        controller .makeFavorite(
+                                        controller.makeFavorite(
                                             controller 
                                                 .product.value.id!);
                                       },
@@ -68,7 +69,7 @@ class ProductDetail extends StatelessWidget {
                                         radius: 30,
                                         backgroundColor: Colors.white,
                                         child:  Icon(
-                                        controller .isFav.value ?   Icons.favorite_rounded : Icons.favorite_border_outlined,
+                                        controller.isFav.value ?   Icons.favorite_rounded : Icons.favorite_border_outlined,
                                           color:  Colors.redAccent,
                                           size: unit * 10,
                                         ),
@@ -91,7 +92,7 @@ class ProductDetail extends StatelessWidget {
                           height: unit * 5,
                         ),
                         Text(
-                          controller .product.value.title!,
+                          controller.product.value.title!,
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: unit * 4,
@@ -108,7 +109,7 @@ class ProductDetail extends StatelessWidget {
                           height: unit * 5,
                         ),
                         Text(
-                          controller .product.value.description!,
+                          controller.product.value.description!,
                           style: TextStyle(fontSize: unit * 4),
                         ),
                         SizedBox(
@@ -122,7 +123,7 @@ class ProductDetail extends StatelessWidget {
                           height: unit * 5,
                         ),
                         Text(
-                          '\$ ${controller .product.value.price}',
+                          '\$ ${controller.product.value.price}',
                           style: TextStyle(fontSize: unit * 4),
                         ),
                       ],

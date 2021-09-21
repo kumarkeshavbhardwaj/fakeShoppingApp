@@ -6,8 +6,17 @@ class ShoppingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          'Shopping Page',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Center(
         child: Text('Shopping Page'),
       ),
     );
